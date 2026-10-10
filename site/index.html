@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="styles/banners.css">
 <link rel="stylesheet" href="styles/memory.css">
 <link rel="stylesheet" href="styles/release.css">
+<link rel="stylesheet" href="styles/story-art.css">
 <script src="app.js" defer></script>
 </head>
 <body>
@@ -81,8 +82,13 @@
 </section>
 <section class="section quality-section" id="memoria-calidad" aria-labelledby="memoria-calidad-title">
 <div class="agents-overview" id="memoria-agentes">
+<div class="story-heading story-heading--craft">
+<div class="story-heading-copy">
 <div class="section-label">Los agentes de Mefisto / TDD y verificación</div><h2 id="memoria-calidad-title">TDD con tres agentes<br>Un contrato verificable</h2>
 <p class="lead">Los criterios de aceptación acordados en la planeación y el refinamiento son el contrato. Mefisto coordina tres subagentes con reglas estrictas de separación de responsabilidades.</p>
+</div>
+<img class="story-illustration" src="assets/oficios-1200.webp" srcset="assets/oficios-640.webp 640w, assets/oficios-1200.webp 1200w" sizes="(max-width: 700px) 90vw, (max-width: 1600px) 44vw, 640px" width="1536" height="1024" alt="" aria-hidden="true" loading="lazy" decoding="async">
+</div>
 <div class="agent-roster" aria-label="Los tres agentes del ciclo TDD">
 <div class="tdd-phase"><b>01 / RED</b><h3>Test writer</h3><p>Convierte los criterios de aceptación de la planeación y el refinamiento en pruebas de comportamiento que deben fallar antes de la implementación.</p><p class="agent-boundary"><span>Límite</span> Define las pruebas sin implementar la funcionalidad.</p><a class="agent-source" aria-label="Ver el contrato de Test writer en GitHub" href="https://github.com/augusto-romero-arango/eda-evsourcing-azure-harness/blob/main/src/published/agents/test-writer.md">Ver contrato ↗</a></div>
 <div class="tdd-phase"><b>02 / GREEN</b><h3>Implementer</h3><p>Escribe el código que hace pasar las pruebas, respetando las reglas del dominio y los ADR del proyecto.</p><p class="agent-boundary"><span>Límite</span> Implementa sin modificar los tests.</p><a class="agent-source" aria-label="Ver el contrato de Implementer en GitHub" href="https://github.com/augusto-romero-arango/eda-evsourcing-azure-harness/blob/main/src/published/agents/implementer.md">Ver contrato ↗</a></div>
@@ -100,10 +106,13 @@
 <div class="quality-contract"><div><h3>UNA PRUEBA ES EVIDENCIA, NO UNA PROMESA</h3><p>El criterio humano se convierte en contratos verificables. TDD reduce el trabajo de vigilancia, pero no demuestra por sí solo que los requisitos sean correctos, ni elimina todos los errores de un LLM.</p></div><div><details><summary>Qué significa «verificado» y qué no</summary><p>El objetivo publicado de cobertura de líneas es <strong>95% para archivos clasificados como lógica</strong>; no es una cifra global ni cobertura de ramas. Los gaps se reportan y no impiden crear el PR. Si falla la instrumentación, el flujo advierte y continúa sin esa medición. También pueden quedar pruebas fallando documentadas: el PR exige leer la evidencia, no solo ver que existe.</p></details><p class="process-sources"><a href="https://github.com/augusto-romero-arango/eda-evsourcing-azure-harness/blob/main/docs/adr/mef-adr-0014-coverage-gate-pipeline-tdd.md">Contrato de cobertura</a> · <a href="https://github.com/augusto-romero-arango/eda-evsourcing-azure-harness/blob/main/src/published/agents/reviewer.md">Contrato del reviewer</a> · <a href="https://github.com/augusto-romero-arango/eda-evsourcing-azure-harness/blob/main/docs/adr/mef-adr-0031-readiness-gate-por-sha.md">Verificación del despliegue</a></p></div></div>
 </section>
 <section class="section memory-section" id="memoria-cuaderno" aria-labelledby="memoria-cuaderno-title">
+<div class="story-heading story-heading--historian">
+<div class="story-heading-copy">
 <div class="section-label">El cuaderno de obra / ADR · field notes · bitácora</div>
-<div class="memory-heading">
-<div><h2 id="memoria-cuaderno-title">Que el software evolucione<br><em>sin perder el porqué</em></h2></div>
-<div><p class="lead">El código muestra el resultado. Los ADR, las notas de campo y la bitácora conservan el contexto: qué decidimos, qué descartamos y cómo fue cambiando el proyecto.</p><p class="memory-analogy">El agrimensor acompaña sus mapas con notas de campo; el navegante registra lo ocurrido en una bitácora. Nuestro cuaderno de obra lleva ese cuidado al software: dejar un rastro que otros puedan seguir.</p></div>
+<h2 id="memoria-cuaderno-title">Que el software evolucione<br><em>sin perder el porqué</em></h2>
+<p class="lead">El código muestra el resultado. Los ADR, las notas de campo y la bitácora conservan el contexto: qué decidimos, qué descartamos y cómo fue cambiando el proyecto.</p><p class="memory-analogy">El agrimensor acompaña sus mapas con notas de campo; el navegante registra lo ocurrido en una bitácora. Nuestro cuaderno de obra lleva ese cuidado al software: dejar un rastro que otros puedan seguir.</p>
+</div>
+<img class="story-illustration" src="assets/historiador-1200.webp" srcset="assets/historiador-640.webp 640w, assets/historiador-1200.webp 1200w" sizes="(max-width: 700px) 90vw, (max-width: 1600px) 44vw, 640px" width="1536" height="1024" alt="" aria-hidden="true" loading="lazy" decoding="async">
 </div>
 <div class="memory-records">
 <div class="memory-record">
@@ -178,7 +187,12 @@
 <details class="dx-scope"><summary>Disponibilidad y diferencia con los mods internos</summary><p>Estas dos superficies pertenecen al plugin publicado para Claude Code. El tablero aparece en la sesión interactiva de <code>mefisto:planner</code>; la consola, en las otras sesiones interactivas del proyecto consumidor. No se muestra una experiencia equivalente para OpenCode ni para sesiones no interactivas. Los pipelines pueden funcionar sin los mods.</p><p>Para desarrollar Mefisto se usan otros dos mods: <code>mefisto-planner-board</code> y <code>mefisto-divine-wager</code>. Sus herramientas internas de bitácora, release y log en vivo no se presentan aquí como capacidades de la consola publicada.</p><a href="https://github.com/augusto-romero-arango/eda-evsourcing-azure-harness/blob/main/docs/adr/mef-adr-0055-superficie-observacion-mods-claude-code.md">Arquitectura y alcance de los mods · MEF-ADR-0055 ↗</a></details>
 </section>
 <section class="section system-section" id="memoria-arquitectura" aria-labelledby="memoria-arquitectura-title">
+<div class="story-heading story-heading--territory">
+<div class="story-heading-copy">
 <div class="section-label">El sistema que construyes / arquitectura dirigida por eventos</div><h2 id="memoria-arquitectura-title">Cada dominio conserva su historia<br>Los eventos cruzan sus límites</h2><p class="lead">Persistir un hecho y comunicarlo son responsabilidades diferentes. Marten conserva los eventos del dominio. Service Bus transporta los eventos de integración. Las proyecciones producen las vistas que necesita el usuario.</p>
+</div>
+<img class="story-illustration" src="assets/territorio-1200.webp" srcset="assets/territorio-640.webp 640w, assets/territorio-1200.webp 1200w" sizes="(max-width: 700px) 90vw, (max-width: 1600px) 44vw, 640px" width="1536" height="1024" alt="" aria-hidden="true" loading="lazy" decoding="async">
+</div>
 <figure class="event-system" aria-label="Ejemplo de dos dominios desacoplados mediante Azure Service Bus, cada uno con su persistencia de eventos">
 <figcaption class="system-label">EJEMPLO DIDÁCTICO · PEDIDOS E INVENTARIO DENTRO DE UN MISMO BOUNDED CONTEXT · NO ES UN SISTEMA YA GENERADO</figcaption>
 <div class="domain-system">

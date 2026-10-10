@@ -31,7 +31,11 @@ for (const el of elements) {
   if (el.attrs.srcset) for (const candidate of el.attrs.srcset.split(',')) assert(fs.existsSync(path.resolve(dir,candidate.trim().split(/\s/)[0])), 'Missing responsive image');
   for (const attr of ['aria-labelledby','aria-controls']) if (el.attrs[attr]) for (const id of el.attrs[attr].split(' ')) assert(ids.has(id), `Missing ${attr} target: ${id}`);
   if (el.attrs.target === '_blank') assert(el.attrs.rel?.includes('noopener'));
-  if (el.tag === 'img') for (const attr of ['alt','width','height']) assert(el.attrs[attr], `Image missing ${attr}`);
+  if (el.tag === 'img') {
+    for (const attr of ['alt','width','height']) assert(Object.hasOwn(el.attrs, attr), `Image missing ${attr}`);
+    assert(Number(el.attrs.width) > 0 && Number(el.attrs.height) > 0, 'Image dimensions must be positive');
+    if (!el.attrs.alt) assert.equal(el.attrs['aria-hidden'], 'true', 'Decorative images are explicitly hidden from assistive technology');
+  }
   if (el.tag === 'button') assert.equal(el.attrs.type, 'button');
 }
 assert.equal(elements.filter(el => el.tag === 'article').length, 1);
@@ -83,4 +87,15 @@ const contrasts=[];
 for (const fg of ['193f58','526874','a32d2d']) for (const bg of ['e9eef0','f2f6f7']) { const ratio=(luminance(bg)+.05)/(luminance(fg)+.05); assert(ratio>=4.5, `Contrast ${fg}/${bg}`); contrasts.push(Number(ratio.toFixed(2))); }
 const artBytes = ['atlas','fausto','mefisto'].reduce((total,name) => total+fs.statSync(path.join(dir,'assets',`${name}-1536.webp`)).size,0);
 assert(artBytes<1500000,'Full-size art budget');
-console.log(JSON.stringify({status:'passed',sections:'Atlas only',ids:ids.size,localAssetChecks:localChecks,eventStates:3,mascots:2,textContrastMinimum:Math.min(...contrasts),fullSizeArtBytes:artBytes,indexing:'disabled',scope:'Source structure, local assets, isolated JS and solid-color contrast; not browser, screen-reader, screenshot or hosted-site QA'},null,2));
+const storyImages = elements.filter(el => el.tag === 'img' && el.attrs.class === 'story-illustration');
+assert.equal(storyImages.length, 3, 'Three quiet narrative illustrations');
+for (const el of storyImages) {
+  assert.equal(el.attrs.loading, 'lazy');
+  assert.equal(el.attrs.decoding, 'async');
+  assert.equal(el.attrs.alt, '');
+  assert.equal(el.attrs['aria-hidden'], 'true');
+  assert(el.attrs.srcset && el.attrs.sizes, 'Responsive narrative illustrations');
+}
+const storyArtBytes = ['oficios','historiador','territorio'].reduce((total,name) => total+fs.statSync(path.join(dir,'assets',`${name}-1200.webp`)).size,0);
+assert(storyArtBytes<600000,'Lower-page illustrations stay below 600 KB in total');
+console.log(JSON.stringify({status:'passed',sections:'Atlas only',ids:ids.size,localAssetChecks:localChecks,eventStates:3,mascots:2,storyIllustrations:storyImages.length,textContrastMinimum:Math.min(...contrasts),fullSizeArtBytes:artBytes,storyArtBytes,indexing:'disabled',scope:'Source structure, local assets, isolated JS and solid-color contrast; not browser, screen-reader, screenshot or hosted-site QA'},null,2));

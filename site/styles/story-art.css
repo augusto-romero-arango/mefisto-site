@@ -1,0 +1,55 @@
+/* Open atlas vignettes: ink on the same paper, never a framed card.
+   Copy and drawings have separate tracks so faded ink cannot reduce text contrast. */
+#memoria .story-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  align-items: center;
+  gap: clamp(22px, 4vw, 64px);
+  margin: -12px 0 32px;
+  min-height: 290px;
+}
+#memoria .story-heading-copy { min-width: 0; }
+#memoria .story-heading .section-label { line-height: 1.8; }
+#memoria .story-heading h2 { max-width: 650px; }
+#memoria .story-heading h2 em { color: var(--accent); font-weight: 400; }
+#memoria .story-heading .lead { font-size: 16px; margin: 0; max-width: 650px; }
+#memoria .story-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  opacity: .66;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  user-select: none;
+  /* Fade the paper edges as well as the illustration's own engraved vignette. */
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 36%, transparent 73%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 36%, transparent 73%);
+}
+#memoria .story-heading--historian {
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  margin-bottom: 38px;
+}
+#memoria .story-heading--historian .story-heading-copy { grid-column: 2; grid-row: 1; }
+#memoria .story-heading--historian .story-illustration { grid-column: 1; grid-row: 1; opacity: .7; }
+#memoria .story-heading--historian .memory-analogy { font-size: 18px; }
+#memoria .story-heading--territory .story-illustration { opacity: .6; }
+@media (max-width: 1000px) and (min-width: 701px) {
+  #memoria .story-heading { gap: 20px; }
+  #memoria .story-heading h2 { font-size: 32px; }
+}
+@media (max-width: 700px) {
+  #memoria .story-heading,
+  #memoria .story-heading--historian { grid-template-columns: 1fr; gap: 0; margin: 0 0 24px; min-height: 0; }
+  #memoria .story-heading--historian .story-heading-copy,
+  #memoria .story-heading--historian .story-illustration { grid-column: auto; grid-row: auto; }
+  #memoria .story-illustration { max-width: 390px; margin: 10px auto 0; }
+  #memoria .story-heading h2 { font-size: 33px; }
+  #memoria .story-heading .lead { font-size: 15px; }
+}
+@media print {
+  #memoria .story-illustration { display: none; }
+  #memoria .story-heading,
+  #memoria .story-heading--historian { display: block; min-height: 0; margin: 0 0 24px; }
+}

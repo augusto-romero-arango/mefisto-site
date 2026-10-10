@@ -17,6 +17,7 @@ Sitio estático de Mefisto, con la dirección visual Atlas de la memoria. Reposi
 - Navegación propia, sin selector de conceptos ni instrucciones del estudio creativo. Se mantienen las anclas `memoria-*` para las revisiones existentes.
 - Enlaces de instalación y OpenCode actualizados; documentación dirigida a la guía del consumidor; enlace a la licencia Apache-2.0 del plugin.
 - Ilustraciones WebP de 768 y 1536 píxeles, dimensiones declaradas y carga diferida de las imágenes inferiores. Las tres versiones grandes suman 1.168.412 bytes frente a 10.069.475 bytes de los originales: 88 % menos.
+- Tres escenas complementarias integradas sin marco: los oficios de la obra en TDD, el historiador en el cuaderno y el territorio conectado junto a la arquitectura. Sus versiones de 1200 píxeles suman 449.504 bytes; las de 640, 123.714 bytes. Se cargan de forma diferida, fuera de la portada, y no quedan detrás del texto técnico.
 - Fuentes locales Baskervville, Source Sans 3 e IBM Plex Mono, con sus licencias OFL. No se hacen peticiones a Google Fonts desde la página.
 - Captura de Fausto original. En Mefisto se ocultaron únicamente dos rutas locales, con autorización del autor; el resto de los píxeles permanece idéntico. La captura sin protección no está en `site/`.
 - Favicon, icono móvil, imagen social de 1200 × 630, metadatos, canonical, sitemap y página 404. La imagen social tiene su fuente editable en `review/social-card.svg`.
@@ -74,6 +75,8 @@ Referencias: [workflow de Pages](https://docs.github.com/en/pages/getting-starte
 - [ ] Ya en el dominio final, probar CTAs, anclas, URL social, HTTPS y 404. Validar que el sitio es accesible sin sesión. Revisar la representación real en buscadores y redes cuando estos rastreen la página.
 
 ## Recursos y reproducción
+
+Las escenas complementarias se generaron con la herramienta integrada Imagegen. Sus prompts completos y rutas finales están en `review/story-art.json`. Para preparar las variantes web desde los tres PNG originales, ejecutar `node review/prepare-story-art.cjs /ruta/oficios.png /ruta/historiador.png /ruta/territorio.png`, con Sharp disponible en el entorno. Solo cambia tamaño y compresión; opacidad y bordes desvanecidos se aplican con CSS en `site/styles/story-art.css`. Son acompañamiento editorial decorativo: no sustituyen el texto ni los diagramas, ni afirman representar escenas literales de Goethe.
 
 Todos los recursos necesarios para servir el sitio están incluidos en `site/assets/`. Las ilustraciones originales y la captura sin protección siguen en la exploración, fuera de esta copia. Solo para regenerar los recursos, ejecutar `node review/prepare-assets.cjs /ruta/a/mefisto-direcciones`, indicando la carpeta de originales. El script requiere la biblioteca Sharp disponible en el entorno y no sobrescribe los originales. La comparación exige identidad exacta de los píxeles fuera de los dos rectángulos autorizados y relleno opaco dentro de ellos.
 
