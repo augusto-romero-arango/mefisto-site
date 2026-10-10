@@ -1,6 +1,6 @@
 # Mefisto · sitio web
 
-Sitio estático de Mefisto, con la dirección visual Atlas de la memoria. Repositorio público: [augusto-romero-arango/mefisto-site](https://github.com/augusto-romero-arango/mefisto-site). Destino de esta primera publicación: [GitHub Pages](https://augusto-romero-arango.github.io/mefisto-site/). El dominio `mefisto.io` se conectará en una etapa posterior, con autorización del autor.
+Sitio estático de Mefisto, con la dirección visual Atlas de la memoria. Repositorio público: [augusto-romero-arango/mefisto-site](https://github.com/augusto-romero-arango/mefisto-site). Publicado en **[mefisto.io](https://mefisto.io/)** mediante GitHub Pages, con HTTPS obligatorio; `www.mefisto.io` y la dirección anterior de `github.io` redirigen al dominio principal.
 
 ## Estructura
 
@@ -46,32 +46,32 @@ En Settings → Pages, la fuente debe ser **GitHub Actions**. Cada push a `main`
 Para preparar la misma salida localmente, sin publicar:
 
 ```sh
-npm run build -- https://augusto-romero-arango.github.io/mefisto-site/
+npm run build -- https://mefisto.io/
 ```
 
 El proceso no modifica `site/` y puede volver a ejecutarse sobre su propia salida. Si encuentra archivos ajenos en `dist/`, se detiene para que se revisen; no los borra ni publica por accidente.
 
-La indexación está desactivada por defecto con `noindex,follow`. Se permite el rastreo para que el buscador pueda leer esa indicación. No es un mecanismo de privacidad: el repositorio y la web son públicos. El `robots.txt` de un proyecto bajo un subdirectorio no sustituye al del dominio raíz; la protección de prepublicación aquí depende del meta `noindex`.
+La indexación la controla la variable de Actions `SITE_INDEXABLE`. Hoy vale `true`: la página publica `index,follow` y `robots.txt` referencia `https://mefisto.io/sitemap.xml`, lo que no garantiza la inclusión en buscadores. Sin la variable, el build usa `noindex,follow`.
 
-Para conectar el dominio definitivo, en este orden:
+### Dominio `mefisto.io`
 
-1. Verificar la propiedad del dominio en GitHub y configurarlo en Settings → Pages, antes de modificar su DNS.
-2. Configurar los registros DNS según la documentación oficial, esperar su validación y activar HTTPS. No se han cambiado registros ni configurado el dominio en esta entrega.
-3. Volver a ejecutar el workflow. Canonical, imagen social, sitemap y enlaces de la página 404 adoptarán la URL informada por Pages, sin editar el HTML manualmente.
-4. Tras revisar el sitio en el dominio final, establecer la variable de Actions `SITE_INDEXABLE` en `true` y volver a desplegar. Esto activa `index,follow` y publica la referencia al sitemap en `robots.txt`; no garantiza la inclusión en buscadores.
+- **Pages:** dominio propio `mefisto.io`, verificado en la cuenta de GitHub y con "Enforce HTTPS" activo.
+- **DNS (GoDaddy):** cuatro registros `A` en `@` hacia `185.199.108.153`, `185.199.109.153`, `185.199.110.153` y `185.199.111.153`; `CNAME` de `www` hacia `augusto-romero-arango.github.io`; TXT `_github-pages-challenge-augusto-romero-arango` para la verificación. No debe haber forwarding ni Website Builder sobre el dominio.
+- **Workflow:** canonical, imagen social, sitemap y enlaces de la página 404 adoptan la URL informada por Pages. El build exige HTTPS, así que el workflow normaliza `http://` a `https://`; mientras GitHub no emite el certificado, Pages informa la URL con `http://`.
+- Si el certificado se queda en estado `new` con el DNS correcto, abrir Settings → Pages en el navegador destraba la emisión.
 
 Para deshacer un cambio, revertir su commit en `main` y dejar que el workflow vuelva a publicar. El historial de Git y Actions conserva la trazabilidad; no es necesario reescribir ramas ni borrar versiones.
 
 Referencias: [workflow de Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) y [dominio propio](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
 
-## Revisión pendiente antes del dominio definitivo
+## Revisión pendiente
 
 - [ ] Revisar visualmente en móvil (320, 390 y 768 px) y escritorio (1280 y 1600 px), incluyendo Safari y Chrome. Confirmar que las fuentes nuevas conservan los saltos, que el punto rojo de la i queda bien y que no hay desbordes ni texto sobre zonas de imagen de bajo contraste.
 - [ ] Recorrer por teclado: salto al contenido, navegación, desplegables, capturas y demostración de eventos. Comprobar también con un lector de pantalla, zoom al 200 % y JavaScript desactivado.
 - [ ] Aprobar copy, imágenes, captura protegida y vista previa social. Confirmar que las capacidades descritas siguen coincidiendo con la versión que se publicará del plugin.
 - [ ] Probar en un entorno autorizado de prepublicación: HTTPS, rutas y 404, carga de fuentes, cabeceras, tamaños transferidos y métricas de rendimiento reales. Servir HTML con revalidación; no marcar recursos sin hash como inmutables.
-- [ ] Conectar `mefisto.io` únicamente con autorización explícita, validar DNS/TLS y elegir si `www` redirige al dominio principal. No se modificó DNS.
-- [ ] Activar la indexación con `SITE_INDEXABLE=true` únicamente después de revisar el dominio definitivo.
+- [x] Conectar `mefisto.io`, validar DNS/TLS y redirigir `www` al dominio principal.
+- [x] Activar la indexación con `SITE_INDEXABLE=true`.
 - [ ] Ya en el dominio final, probar CTAs, anclas, URL social, HTTPS y 404. Validar que el sitio es accesible sin sesión. Revisar la representación real en buscadores y redes cuando estos rastreen la página.
 
 ## Recursos y reproducción
@@ -86,4 +86,4 @@ Las fuentes se obtuvieron de Google Fonts; sus URLs figuran en `review/font-sour
 
 ## Alcance de esta entrega
 
-El sitio sigue siendo una versión revisable, no una certificación de producción. El flujo de publicación comprueba el código y la preparación de los archivos; no certifica accesibilidad, rendimiento real ni capacidades del plugin. GitHub Pages sirve archivos estáticos y gestiona las cabeceras del hosting. No se han añadido servicios de backend, analítica ni cambios de DNS.
+El sitio sigue siendo una versión revisable, no una certificación de producción. El flujo de publicación comprueba el código y la preparación de los archivos; no certifica accesibilidad, rendimiento real ni capacidades del plugin. GitHub Pages sirve archivos estáticos y gestiona las cabeceras del hosting. No se han añadido servicios de backend ni analítica.
