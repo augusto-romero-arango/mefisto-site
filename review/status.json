@@ -1,4 +1,5 @@
 {
+  "reportType": "Historical local review before GitHub Pages setup; see Actions for current deployment status",
   "status": "passed",
   "sections": "Atlas only",
   "ids": 32,

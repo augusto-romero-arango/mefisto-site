@@ -1,11 +1,12 @@
 {
-  "name": "mefisto-site-candidate",
+  "name": "mefisto-site",
   "private": true,
   "version": "0.1.0",
-  "description": "Candidata local de publicación de mefisto.io; sitio estático sin servicios de backend",
+  "description": "Sitio de Mefisto; HTML estático publicado con GitHub Pages",
   "scripts": {
-    "test": "node review/verify.cjs",
-    "check:links": "node review/check-links.cjs"
+    "test": "node review/verify.cjs && node --test review/build.test.cjs",
+    "check:links": "node review/check-links.cjs",
+    "build": "node scripts/build.cjs"
   },
   "engines": { "node": ">=20" }
 }

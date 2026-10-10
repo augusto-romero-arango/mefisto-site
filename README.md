@@ -1,10 +1,13 @@
-# Mefisto · candidata de publicación RC1
+# Mefisto · sitio web
 
-Estado: preparada para revisión local, no publicada. Esta candidata contiene únicamente Atlas de la memoria. El sitio y sus verificaciones funcionan desde esta carpeta; la exploración original se conserva intacta en `/Users/augusto-romero-arango/Documents/Codex/2026-10-09/sites-plugin-sites-openai-curated-remote/outputs/mefisto-direcciones/`.
+Sitio estático de Mefisto, con la dirección visual Atlas de la memoria. Repositorio público: [augusto-romero-arango/mefisto-site](https://github.com/augusto-romero-arango/mefisto-site). Destino de esta primera publicación: [GitHub Pages](https://augusto-romero-arango.github.io/mefisto-site/). El dominio `mefisto.io` se conectará en una etapa posterior, con autorización del autor.
 
 ## Estructura
 
-- `site/`: raíz del sitio que se entregaría al proveedor de hosting. HTML, CSS, JavaScript y recursos locales; sin build, backend ni dependencias de ejecución.
+- `site/`: fuentes HTML, CSS, JavaScript y recursos locales; sin backend ni dependencias de ejecución.
+- `scripts/build.cjs`: adapta metadatos y rutas al destino de publicación, sin transformar el diseño.
+- `dist/`: salida generada e ignorada por Git; es lo único que se entrega al hosting.
+- `.github/workflows/pages.yml`: verifica y publica automáticamente los cambios de `main`; en los pull requests solo ejecuta pruebas.
 - `review/`: comprobaciones y fuentes auxiliares. No se sube al hosting.
 - `package.json`: comandos de verificación con Node 20 o posterior. No es necesario instalar paquetes para ejecutarlos.
 
@@ -29,25 +32,46 @@ npm test
 npm run check:links
 ```
 
-`npm test` comprueba estructura y anclas, recursos locales, metadatos, presupuesto de imágenes, la lógica de los tres estados del ejemplo, las dos mascotas y contraste de texto sobre los dos fondos sólidos. No renderiza la página ni sustituye una auditoría de accesibilidad.
+`npm test` comprueba estructura y anclas, recursos locales, metadatos, presupuesto de imágenes, la lógica de los tres estados del ejemplo, las dos mascotas y contraste de texto sobre los dos fondos sólidos. También verifica la preparación para un subdirectorio de GitHub Pages y para un dominio propio: canonical, imagen social, sitemap, indexación y enlaces de la página 404, incluso desde URL inexistentes anidadas. No renderiza la página ni sustituye una auditoría de accesibilidad.
 
 `npm run check:links` comprueba recursos externos por HTTP y las anclas de Markdown usadas para instalación y OpenCode. Requiere red. Puede verse afectado por límites temporales del servidor.
 
-Las pruebas se ejecutaron correctamente en esta entrega. También siguen pasando las comprobaciones de la exploración original. La revisión visual en navegador no se pudo realizar porque la automatización de la página local estaba restringida; no se usó otra superficie para eludir esa restricción.
+`review/status.json` conserva el informe de la revisión local previa al despliegue, no el estado en vivo del servicio. Los resultados actuales de pruebas y despliegues están en [Actions](https://github.com/augusto-romero-arango/mefisto-site/actions).
 
-## Antes de autorizar publicación
+## Publicación en GitHub Pages
+
+En Settings → Pages, la fuente debe ser **GitHub Actions**. Cada push a `main` ejecuta las verificaciones, prepara los archivos usando la URL que informa Pages y despliega el resultado. También se puede ejecutar manualmente desde Actions. No requiere instalar dependencias ni guardar credenciales personales en el repositorio; el despliegue utiliza los permisos acotados del workflow.
+
+Para preparar la misma salida localmente, sin publicar:
+
+```sh
+npm run build -- https://augusto-romero-arango.github.io/mefisto-site/
+```
+
+El proceso no modifica `site/` y puede volver a ejecutarse sobre su propia salida. Si encuentra archivos ajenos en `dist/`, se detiene para que se revisen; no los borra ni publica por accidente.
+
+La indexación está desactivada por defecto con `noindex,follow`. Se permite el rastreo para que el buscador pueda leer esa indicación. No es un mecanismo de privacidad: el repositorio y la web son públicos. El `robots.txt` de un proyecto bajo un subdirectorio no sustituye al del dominio raíz; la protección de prepublicación aquí depende del meta `noindex`.
+
+Para conectar el dominio definitivo, en este orden:
+
+1. Verificar la propiedad del dominio en GitHub y configurarlo en Settings → Pages, antes de modificar su DNS.
+2. Configurar los registros DNS según la documentación oficial, esperar su validación y activar HTTPS. No se han cambiado registros ni configurado el dominio en esta entrega.
+3. Volver a ejecutar el workflow. Canonical, imagen social, sitemap y enlaces de la página 404 adoptarán la URL informada por Pages, sin editar el HTML manualmente.
+4. Tras revisar el sitio en el dominio final, establecer la variable de Actions `SITE_INDEXABLE` en `true` y volver a desplegar. Esto activa `index,follow` y publica la referencia al sitemap en `robots.txt`; no garantiza la inclusión en buscadores.
+
+Para deshacer un cambio, revertir su commit en `main` y dejar que el workflow vuelva a publicar. El historial de Git y Actions conserva la trazabilidad; no es necesario reescribir ramas ni borrar versiones.
+
+Referencias: [workflow de Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) y [dominio propio](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+
+## Revisión pendiente antes del dominio definitivo
 
 - [ ] Revisar visualmente en móvil (320, 390 y 768 px) y escritorio (1280 y 1600 px), incluyendo Safari y Chrome. Confirmar que las fuentes nuevas conservan los saltos, que el punto rojo de la i queda bien y que no hay desbordes ni texto sobre zonas de imagen de bajo contraste.
 - [ ] Recorrer por teclado: salto al contenido, navegación, desplegables, capturas y demostración de eventos. Comprobar también con un lector de pantalla, zoom al 200 % y JavaScript desactivado.
 - [ ] Aprobar copy, imágenes, captura protegida y vista previa social. Confirmar que las capacidades descritas siguen coincidiendo con la versión que se publicará del plugin.
-- [ ] Elegir proveedor y confirmar permisos, acceso público, condiciones de hosting y compatibilidad de dominio. No se ha creado un Site ni contratado hosting.
-- [ ] Guardar esta candidata en el repositorio que decida el autor y establecer un proceso de despliegue reversible. Esta carpeta aún no es un repositorio Git independiente.
 - [ ] Probar en un entorno autorizado de prepublicación: HTTPS, rutas y 404, carga de fuentes, cabeceras, tamaños transferidos y métricas de rendimiento reales. Servir HTML con revalidación; no marcar recursos sin hash como inmutables.
 - [ ] Conectar `mefisto.io` únicamente con autorización explícita, validar DNS/TLS y elegir si `www` redirige al dominio principal. No se modificó DNS.
-- [ ] Antes de la salida pública, cambiar el meta robots a `index,follow` y `robots.txt` a `Allow: /`, añadir `Sitemap: https://mefisto.io/sitemap.xml` y ajustar las dos comprobaciones de indexación en `review/verify.cjs`. Los metadatos y el sitemap asumen ese dominio; revisarlos si el destino cambia.
+- [ ] Activar la indexación con `SITE_INDEXABLE=true` únicamente después de revisar el dominio definitivo.
 - [ ] Ya en el dominio final, probar CTAs, anclas, URL social, HTTPS y 404. Validar que el sitio es accesible sin sesión. Revisar la representación real en buscadores y redes cuando estos rastreen la página.
-
-La candidata incluye `noindex,nofollow` y `Disallow: /` como precaución de prepublicación. No son un mecanismo de privacidad: no sustituyen autenticación ni garantizan que una URL no aparezca en un buscador.
 
 ## Recursos y reproducción
 
@@ -59,4 +83,4 @@ Las fuentes se obtuvieron de Google Fonts; sus URLs figuran en `review/font-sour
 
 ## Alcance de esta entrega
 
-Se entrega una candidata revisable, no una certificación de producción. No hay despliegue, cuenta de hosting vinculada, cambios de DNS, mensajes externos ni publicación en GitHub. La revisión visual y la decisión de hosting son los siguientes pasos.
+El sitio sigue siendo una versión revisable, no una certificación de producción. El flujo de publicación comprueba el código y la preparación de los archivos; no certifica accesibilidad, rendimiento real ni capacidades del plugin. GitHub Pages sirve archivos estáticos y gestiona las cabeceras del hosting. No se han añadido servicios de backend, analítica ni cambios de DNS.
