@@ -1,0 +1,40 @@
+/* Publication-only refinements. The visual exploration is kept separately. */
+:root { color-scheme: light; }
+html { scroll-padding-top: 24px; }
+body { min-width: 0; }
+img { max-width: 100%; }
+main:focus { outline: none; }
+.skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; transform: translateY(-180%); padding: 12px 18px; background: #193f58; color: #fff; }
+.skip-link:focus { transform: translateY(0); }
+.footer { max-width: 1600px; margin: 0 auto; }
+.footer nav { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+.footer a { display: inline-flex; min-height: 32px; align-items: center; }
+#memoria .site-links a { display: inline-flex; align-items: center; min-height: 44px; }
+#memoria summary { min-height: 32px; padding-block: 5px; }
+#memoria .product-home { min-height: 44px; display: inline-flex; align-items: center; }
+#memoria .section, #memoria .product-intro, #memoria .atlas-story,
+#memoria .process-phase, #memoria .agents-overview { scroll-margin-top: 24px; }
+#memoria .process-body, #memoria .process-proof, #memoria .product-pitch,
+#memoria .memory-record-body, #memoria .phase-copy { min-width: 0; }
+#memoria p, #memoria dd, #memoria code { overflow-wrap: break-word; }
+#memoria .event-list button { min-height: 48px; }
+#memoria .sprite { color: var(--ink); }
+@media(max-width:600px) {
+  #memoria .product-entry .site-nav { height: auto; min-height: 64px; flex-wrap: wrap; gap: 0 18px; padding-block: 6px; }
+  #memoria .site-links { gap: 6px 16px; flex-wrap: wrap; }
+  #memoria .product-entry .site-links a:nth-child(n) { display: inline-flex; }
+  #memoria .site-links a { font-size: 12px; }
+  #memoria .product-intro { padding-top: 24px; }
+  #memoria .event-system { margin-inline: 0; }
+  #memoria .event-list button { overflow-wrap: anywhere; }
+  #memoria .process-sources, #memoria .system-label { font-size: 10px; }
+  #memoria .dx-source, #memoria .agent-source { max-width: 100%; }
+  .footer nav { gap: 4px 18px; margin-top: 12px; }
+}
+@media print {
+  .skip-link { display: none; }
+  main { max-width: none; }
+  article { break-before: auto; }
+  .section, #memoria .dx-mod { break-inside: auto; }
+  .footer { display: block; }
+}

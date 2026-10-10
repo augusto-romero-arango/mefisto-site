@@ -1,0 +1,11 @@
+{
+  "name": "mefisto-site-candidate",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Candidata local de publicación de mefisto.io; sitio estático sin servicios de backend",
+  "scripts": {
+    "test": "node review/verify.cjs",
+    "check:links": "node review/check-links.cjs"
+  },
+  "engines": { "node": ">=20" }
+}

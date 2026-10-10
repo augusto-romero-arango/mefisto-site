@@ -1,0 +1,10 @@
+const states=[['Borrador','productos: 0 · eventos aplicados: 1'],['Borrador','productos: 1 · eventos aplicados: 2'],['Confirmado','productos: 1 · eventos aplicados: 3']];
+document.querySelectorAll('[data-event]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-event]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));const s=states[Number(b.dataset.event)];document.getElementById('event-state').textContent=s[0];document.getElementById('event-detail').textContent=s[1]}));
+const palette={h:'#a32d2d',r:'#c4504d',t:'#a32d2d',E:'#2c2c2a',M:'#501313',W:'#f1efe8',k:'#f1c9a5',f:'#d9a07f',i:'#8a6f5a',K:'#2c2c2a',z:'#c4504d',a:'#9c978c',T:'#a32d2d',d:'#501313',D:'#5f5e5a',U:'#378add',u:'#b5d4f4',q:'#b4b2a9'};
+const grids={mefisto:['..................','..................','....h..........h..','....hh........hh..','.....hrrrrrrrrh...','.....rrrrrrrrrr..t','.....rrEErrEErr.tt','.....rrEErrEErr..t','.....rrrrrrrrrr..t','......rrMMMMrr..t.','.......rrrrrrtt...','.......rr..rr.....'],fausto:['..................','.....KKKKKKKKKK...','......KKKKKKKK.z..','.......KKKKKK..z..','......akkkkkka....','......akEkkEka....','......akkkkkka....','......akkffkka....','......aaiiiiaa....','.....TdaaaaaadT...','....TTTdaaaadTTT..','....TTTTdaadTTTT..']};
+// Original desarrollador.trabajando pose, frame A, from hooks/sprites.ts.
+const developerLaptop=['DDDDD','DUuUD','DuUUD','DDDDD','qqqqqqq'];
+grids['mefisto-computer']=grids.mefisto.map((row,y)=>y<7?row:developerLaptop[y-7]+row.slice(developerLaptop[y-7].length));
+const spriteLabels={fausto:'Fausto, mascota original',mefisto:'Mefisto, mascota original','mefisto-computer':'Mefisto trabajando con su computador, mascota original'};
+document.querySelectorAll('[data-sprite]').forEach(el=>{const grid=grids[el.dataset.sprite];let svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12" shape-rendering="crispEdges" role="img" aria-label="'+spriteLabels[el.dataset.sprite]+'">';grid.forEach((row,y)=>[...row].forEach((c,x)=>{if(palette[c])svg+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+palette[c]+'"/>'}));el.innerHTML=svg+'</svg>'});
+

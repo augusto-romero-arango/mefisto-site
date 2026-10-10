@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="brand-dot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a32d2d"/><stop offset="0.35" stop-color="#a32d2d"/><stop offset="0.35" stop-color="#193f58"/><stop offset="1" stop-color="#193f58"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="#e9eef0"/>
+  <g fill="none" stroke="#b7c7cd" stroke-width="1">
+    <path d="M64 70H1136M64 554H1136M868 118V486M916 118V486M964 118V486M1012 118V486M1060 118V486"/>
+    <path d="M824 166H1110M824 214H1110M824 262H1110M824 310H1110M824 358H1110M824 406H1110M824 454H1110"/>
+  </g>
+  <path d="M825 462L873 419L858 367L931 318L917 257L990 225L979 171L1083 128" fill="none" stroke="#a32d2d" stroke-width="2"/>
+  <g fill="#a32d2d"><circle cx="873" cy="419" r="5"/><circle cx="931" cy="318" r="5"/><circle cx="990" cy="225" r="5"/></g>
+  <g fill="#193f58">
+    <text x="64" y="47" font-family="Menlo,monospace" font-size="16" letter-spacing="2">MEFISTO.IO / OPEN SOURCE</text>
+    <text x="64" y="224" font-family="Baskerville,Georgia,serif" font-size="120" letter-spacing="-4">Mef<tspan fill="url(#brand-dot)">i</tspan>sto</text>
+    <text x="67" y="326" font-family="Baskerville,Georgia,serif" font-size="49">Delega la construcción</text>
+    <text x="67" y="389" font-family="Baskerville,Georgia,serif" font-size="49" font-style="italic" fill="#a32d2d">Conserva el criterio</text>
+    <text x="67" y="467" font-family="Arial,sans-serif" font-size="23">Agentes, arquitectura y TDD para .NET en Azure</text>
+    <text x="64" y="593" font-family="Menlo,monospace" font-size="16">CLAUDE CODE + OPENCODE</text>
+    <text x="1136" y="593" text-anchor="end" font-family="Menlo,monospace" font-size="16">EVENT SOURCING · AZURE SERVERLESS</text>
+  </g>
+</svg>

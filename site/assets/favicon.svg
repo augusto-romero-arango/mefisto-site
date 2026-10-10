@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mefisto">
+  <rect width="64" height="64" rx="12" fill="#e9eef0"/>
+  <path d="M12 48V23h7v4c3-6 13-6 17 0 4-7 16-6 16 4v17h-7V33c0-7-8-6-8 0v15h-7V33c0-7-11-6-11 1v14Z" fill="#193f58"/>
+  <circle cx="48.5" cy="13.5" r="4.5" fill="#a32d2d"/>
+</svg>

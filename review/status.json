@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "sections": "Atlas only",
+  "ids": 32,
+  "localAssetChecks": 22,
+  "eventStates": 3,
+  "mascots": 2,
+  "textContrastMinimum": 5,
+  "fullSizeArtBytes": 1168412,
+  "indexing": "disabled",
+  "scope": "Source structure, local assets, isolated JS and solid-color contrast; not browser, screen-reader, screenshot or hosted-site QA",
+  "externalLinks": {
+    "checked": 35,
+    "passed": 35,
+    "method": "HTTP resource checks; Markdown anchors for installation and OpenCode"
+  },
+  "privacy": {
+    "redacted": "Two local paths in the Mefisto terminal capture",
+    "outsideRedactions": "Pixel-for-pixel identical to original"
+  },
+  "originalReadmeSha": "a46f6d7934b3410953b58bc2c8c335eccc4aecf1",
+  "pending": [
+    "Visual browser QA",
+    "Keyboard and screen reader QA",
+    "Hosting selection and authorization",
+    "Hosted performance, HTTPS, 404 and social-card checks"
+  ],
+  "published": false,
+  "dnsChanged": false
+}

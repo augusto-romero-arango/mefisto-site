@@ -1,0 +1,72 @@
+#memoria .phase-heading.phase-banner{
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  min-height:clamp(380px,40vw,560px);
+  margin:0 -5.555556% 30px;
+  padding:58px 5%;
+  gap:0;
+  background:var(--paper);
+}
+#memoria .phase-banner .phase-art{
+  position:absolute;
+  inset:0 auto 0 0;
+  width:68%;
+  max-width:none;
+  margin:0;
+  padding:0;
+  border:0;
+  pointer-events:none;
+}
+#memoria .phase-banner .phase-art img{
+  display:block;
+  width:100%;
+  height:100%;
+  aspect-ratio:auto;
+  object-fit:cover;
+  object-position:36% 35%;
+  mix-blend-mode:multiply;
+}
+#memoria #memoria-mefisto .phase-banner .phase-art img{object-position:36% 0%}
+#memoria .phase-banner .phase-art:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,var(--paper) 0%,transparent 4%,transparent 86%,var(--paper) 100%),
+    linear-gradient(90deg,var(--paper) 0%,transparent 5%,transparent 36%,var(--paper) 88%);
+}
+#memoria .phase-banner .phase-copy{
+  position:relative;
+  z-index:1;
+  width:52%;
+  min-width:0;
+  margin-left:auto;
+  padding-left:4%;
+}
+#memoria .phase-banner .process-caption{font-size:10px;line-height:1.8;margin-bottom:18px;max-width:470px}
+#memoria .phase-banner h3{font-size:clamp(31px,3.6vw,52px);line-height:1.1;letter-spacing:-.9px;margin:0 0 22px;max-width:610px;text-wrap:balance}
+#memoria .phase-banner .phase-copy>p:not(.process-caption){font-size:15px;line-height:1.8;max-width:550px}
+@media(max-width:1000px){
+#memoria .phase-heading.phase-banner{padding-block:42px}
+#memoria .phase-banner .phase-art{width:72%}
+#memoria .phase-banner .phase-copy{width:54%;padding-left:3%}
+#memoria .phase-banner .phase-copy>p:not(.process-caption){font-size:14px}
+}
+@media(max-width:700px){
+#memoria .phase-heading.phase-banner{min-height:0;align-items:flex-end;padding:clamp(250px,55vw,370px) 5% 36px;margin-bottom:26px}
+#memoria .phase-banner .phase-art{inset:0 0 auto;width:100%;height:clamp(320px,65vw,450px)}
+#memoria .phase-banner .phase-art img{object-position:30% 28%}
+#memoria #memoria-mefisto .phase-banner .phase-art img{object-position:36% 0%}
+#memoria .phase-banner .phase-art:after{background:linear-gradient(180deg,var(--paper) 0%,transparent 4%,transparent 43%,var(--paper) 96%)}
+#memoria .phase-banner .phase-copy{width:100%;padding:0;margin:0}
+#memoria .phase-banner .process-caption{font-size:9px;margin-bottom:13px;max-width:100%}
+#memoria .phase-banner h3{font-size:clamp(30px,5.8vw,40px);max-width:540px;margin-bottom:17px}
+#memoria .phase-banner .phase-copy>p:not(.process-caption){font-size:14px;max-width:550px}
+}
+@media print{
+#memoria .phase-heading.phase-banner{break-inside:avoid;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+
