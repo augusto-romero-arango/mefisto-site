@@ -3,5 +3,3 @@ node_modules/
 .claude/
 .mefisto/
 dist/
-.claude/settings.local.json
-.mefisto/
