@@ -15,7 +15,7 @@ Sitio estático de Mefisto, con la dirección visual Atlas de la memoria. Reposi
 
 - Producto antes del relato; dos etapas, tres agentes TDD, CQRS, decisiones de arquitectura, experiencia de desarrollo y cierre de instalación.
 - Navegación propia, sin selector de conceptos ni instrucciones del estudio creativo. Se mantienen las anclas `memoria-*` para las revisiones existentes.
-- Enlaces de instalación y OpenCode actualizados; documentación dirigida a la guía del consumidor; enlace a la licencia Apache-2.0 del plugin.
+- Enlaces de instalación actualizados y dirigidos al repositorio [augusto-romero-arango/mefisto](https://github.com/augusto-romero-arango/mefisto); documentación dirigida a la guía del consumidor; enlace a la licencia Apache-2.0 del plugin. El plugin funciona solo con Claude Code: OpenCode dejó de ser runtime soportado.
 - Ilustraciones WebP de 768 y 1536 píxeles, dimensiones declaradas y carga diferida de las imágenes inferiores. Las tres versiones grandes suman 1.168.412 bytes frente a 10.069.475 bytes de los originales: 88 % menos.
 - Tres escenas complementarias integradas sin marco: los oficios de la obra en TDD, el historiador en el cuaderno y el territorio conectado junto a la arquitectura. Sus versiones de 1200 píxeles suman 449.504 bytes; las de 640, 123.714 bytes. Se cargan de forma diferida, fuera de la portada, y no quedan detrás del texto técnico.
 - Fuentes locales Baskervville, Source Sans 3 e IBM Plex Mono, con sus licencias OFL. No se hacen peticiones a Google Fonts desde la página.
@@ -35,7 +35,7 @@ npm run check:links
 
 `npm test` comprueba estructura y anclas, recursos locales, metadatos, presupuesto de imágenes, la lógica de los tres estados del ejemplo, las dos mascotas y contraste de texto sobre los dos fondos sólidos. También verifica la preparación para un subdirectorio de GitHub Pages y para un dominio propio: canonical, imagen social, sitemap, indexación y enlaces de la página 404, incluso desde URL inexistentes anidadas. No renderiza la página ni sustituye una auditoría de accesibilidad.
 
-`npm run check:links` comprueba recursos externos por HTTP y las anclas de Markdown usadas para instalación y OpenCode. Requiere red. Puede verse afectado por límites temporales del servidor.
+`npm run check:links` comprueba recursos externos por HTTP y las anclas de Markdown usadas para la instalación. Requiere red. Puede verse afectado por límites temporales del servidor.
 
 `review/status.json` conserva el informe de la revisión local previa al despliegue, no el estado en vivo del servicio. Los resultados actuales de pruebas y despliegues están en [Actions](https://github.com/augusto-romero-arango/mefisto-site/actions).
 
