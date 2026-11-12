@@ -9,7 +9,6 @@
 #memoria .product-identity h1 .brand-i{background-image:linear-gradient(to bottom,var(--accent) 0%,var(--accent) 35%,var(--ink) 35%,var(--ink) 100%);background-clip:text;-webkit-background-clip:text;color:transparent}
 }
 #memoria .product-stack{font:10px/1.9 var(--mono);color:var(--muted);margin:0 0 12px}
-#memoria .product-runtime{font:10px/1.7 var(--mono);color:var(--muted)}
 #memoria .product-promise{font:400 clamp(26px,2.8vw,38px)/1.16 var(--serif);letter-spacing:-.5px;margin:0 0 16px}
 #memoria .product-promise em{color:var(--accent)}
 #memoria .product-summary{font-size:15px;line-height:1.7;max-width:595px;margin:0 0 23px}
@@ -63,7 +62,6 @@
 #memoria .product-identity h1{font-size:61px;margin-bottom:12px}
 #memoria .product-identity .eyebrow{font-size:10px;margin-bottom:10px}
 #memoria .product-stack{font-size:9px;margin-bottom:7px}
-#memoria .product-runtime{font-size:9px}
 #memoria .product-promise{font-size:29px;margin-bottom:14px}
 #memoria .product-summary{font-size:14px;margin-bottom:20px}
 #memoria .product-pitch .cta-row{gap:17px}
